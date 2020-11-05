@@ -1,0 +1,38 @@
+<%= form_with(model: blog, local: true) do |form| %>
+  <% if blog.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(blog.errors.count, "error") %> prohibited this blog from being saved:</h2>
+
+      <ul>
+      <% blog.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+  <div class="tag-area">
+    <%= form.fields_for :select_dates do |c|%>
+      <div class="js-file-group" data-index="<%= c.index %>" >
+        <%= c.label :event_date %>
+        <%= c.datetime_field :event_date %>
+      </div>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+  <button class="add-form-btn">
+    追加する
+  </button>
+
+<% end %>
